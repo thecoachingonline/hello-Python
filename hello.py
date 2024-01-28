@@ -1,15 +1,10 @@
-import numpy as np
-from lwe import KeyGenerator, Encryptor, Decryptor
+import hashlib
 
-# สร้างคีย์ลับ
-key_generator = KeyGenerator(4096)
-secret_key, public_key = key_generator.generate()
+# แปลงข้อความเป็น bytes
+message = b"Hello World!"
 
-# เข้ารหัสข้อความ
-message = "สวัสดีชาวโลก"
-ciphertext = Encryptor(public_key).encrypt(message)
+# แฮชข้อความ
+hashed_message = hashlib.sha256(message).hexdigest()
 
-# ถอดรหัสข้อความ
-plaintext = Decryptor(secret_key).decrypt(ciphertext)
-
-print(plaintext)
+# พิมพ์ค่าแฮช
+print(hashed_message)
